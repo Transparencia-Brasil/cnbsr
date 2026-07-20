@@ -8,7 +8,7 @@ Maintainer: Raul Durlo <durlo.raul@gmail.com>
 Description: Fornece uma base para consultar o Catálogo Nacional de Bens e
     Serviços (CNBS) a partir do R. O escopo inicial está restrito ao catálogo
     de Materiais. As funções de consulta serão implementadas em etapas futuras.
-License: TBD
+License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 Depends: 
