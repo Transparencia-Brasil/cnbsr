@@ -1,4 +1,4 @@
-# cnbsr
+# `{cnbsr}` - Catálogo Nacional de Bens e Serviços com `R`
 
 O `cnbsr` é um pacote R em desenvolvimento para consultar o Catálogo Nacional
 de Bens e Serviços (CNBS) por meio da API pública do Governo Federal.
