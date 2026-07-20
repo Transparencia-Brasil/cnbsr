@@ -1,0 +1,14 @@
+^.*\.Rproj$
+^\.Rproj\.user$
+^\.Rprofile$
+^\.gitignore$
+^\.git$
+^\.agents$
+^\.\.Rcheck$
+^\.github$
+^renv$
+^renv\.lock$
+^AGENTS\.md$
+^CONTRIBUTING\.md$
+^docs$
+^\.lintr$

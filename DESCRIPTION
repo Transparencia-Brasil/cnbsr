@@ -1,0 +1,26 @@
+Package: cnbsr
+Title: Consulta ao Catálogo Nacional de Bens e Serviços
+Version: 0.0.0.9000
+Authors@R: 
+    person("Raul", "Durlo", , "durlo.raul@gmail.com", role = c("aut", "cre"))
+Author: Raul Durlo [aut, cre]
+Maintainer: Raul Durlo <durlo.raul@gmail.com>
+Description: Fornece uma base para consultar o Catálogo Nacional de Bens e
+    Serviços (CNBS) a partir do R. O escopo inicial está restrito ao catálogo
+    de Materiais. As funções de consulta serão implementadas em etapas futuras.
+License: TBD
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+Depends: 
+    R (>= 4.2)
+Imports:
+    httr2,
+    tibble
+Suggests:
+    covr,
+    lintr,
+    roxygen2,
+    styler,
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3
+Config/roxygen2/version: 8.0.0

@@ -1,0 +1,26 @@
+name: Solicitação de funcionalidade
+description: Proponha uma melhoria dentro do escopo do projeto
+title: "[Funcionalidade]: "
+labels: [enhancement]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problema
+      description: Que necessidade esta funcionalidade resolveria?
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposta
+      description: Descreva a solução desejada e alternativas consideradas.
+    validations:
+      required: true
+  - type: checkboxes
+    id: scope
+    attributes:
+      label: Escopo
+      options:
+        - label: A proposta respeita o escopo atual de Materiais.
+          required: true
