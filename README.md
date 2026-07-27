@@ -18,9 +18,13 @@ implementados. As decisões aprovadas estão registradas em
 
 ## Estado do projeto
 
-O projeto está em fase inicial. Antes da primeira versão, serão levantados os
-endpoints de Materiais, definida a interface pública e implementados o cliente
-HTTP e a transformação das respostas.
+O projeto está em fase inicial. A primeira consulta disponível recupera PDMs
+por código de PDM ou de classe. Os demais endpoints de Materiais e a interface
+pública restante ainda serão definidos e implementados.
+
+```r
+get_codigo_pdm_classe(6505)
+```
 
 ## Instalação para desenvolvimento
 

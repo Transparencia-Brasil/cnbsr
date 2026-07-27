@@ -13,8 +13,11 @@ Referências obrigatórias:
 - <https://catalogo.compras.gov.br/cnbs-web/busca>.
 
 Siga as boas práticas descritas em *R Packages*. Prefira `httr2` para HTTP e
-`tibble` para resultados tabulares. Use nomes de funções e argumentos em inglês
-e escreva a documentação voltada ao usuário em português brasileiro.
+`tibble` para resultados tabulares. Use nomes de funções e argumentos em inglês.
+Como exceção, wrappers públicos que correspondam diretamente a endpoints podem
+usar o nome original do endpoint e de seus parâmetros em `snake_case`, para
+manter a rastreabilidade com a API. Escreva a documentação voltada ao usuário em
+português brasileiro.
 
 ## Implementação e qualidade
 
@@ -38,4 +41,3 @@ e escreva a documentação voltada ao usuário em português brasileiro.
 - Faça commits pequenos e descritivos.
 - Não faça merge, crie releases, exclua branches ou altere configurações de
   segurança sem autorização explícita.
-
