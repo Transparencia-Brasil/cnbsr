@@ -5,9 +5,16 @@ de Bens e Serviços (CNBS) por meio da API pública do Governo Federal.
 
 ## Escopo do MVP
 
-Esta primeira etapa é limitada ao catálogo de **Materiais**. A estrutura de
-desenvolvimento, testes e integração contínua já está preparada, mas as funções
-de consulta e seus contratos públicos ainda não foram implementados.
+Esta primeira etapa é limitada ao catálogo de **Materiais**. O MVP permitirá
+pesquisar materiais por texto, consultar um material por código e navegar pela
+hierarquia do catálogo. Os resultados serão retornados como `tibble` e a
+paginação será controlada por página e tamanho, sem obtenção automática de
+todas as páginas.
+
+A estrutura de desenvolvimento, testes e integração contínua já está
+preparada, mas as funções de consulta e seus contratos públicos ainda não foram
+implementados. As decisões aprovadas estão registradas em
+[`docs/decisions/0001-escopo-mvp.md`](docs/decisions/0001-escopo-mvp.md).
 
 ## Estado do projeto
 
@@ -37,6 +44,4 @@ executadas com `R CMD check`.
 
 ## Licença
 
-A licença ainda não foi escolhida. Consulte as decisões pendentes em
-[`docs/decisions/README.md`](docs/decisions/README.md).
-
+O `cnbsr` é disponibilizado sob a licença MIT.
