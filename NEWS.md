@@ -1,3 +1,10 @@
+# cnbsr 0.0.0.9003
+
+- Adiciona `get_dados_basicos_pdm_por_codigo()` para recuperar dados básicos e
+  a hierarquia de um PDM pelo código.
+- Converte respostas de objeto único em `tibble` e mantém o esquema
+  `PdmParcial` em respostas `204` sem conteúdo.
+
 # cnbsr 0.0.0.9002
 
 - Adiciona `get_material_caracteristica_valor_pdm_sem_filtro()` para recuperar
