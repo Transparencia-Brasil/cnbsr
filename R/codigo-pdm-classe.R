@@ -81,7 +81,7 @@ get_codigo_pdm_classe <- function(
   busca_classe <- check_optional_flag(busca_classe, "busca_classe")
   busca_pdm <- check_optional_flag(busca_pdm, "busca_pdm")
 
-  req <- cnbs_request("codigoPdmClasse") |> # nolint: object_usage_linter.
+  req <- cnbs_request("codigoPdmClasse") |>
     httr2::req_url_query(codigoPdmClasse = codigo_pdm_classe)
 
   if (!is.null(busca_classe)) {
@@ -92,8 +92,8 @@ get_codigo_pdm_classe <- function(
   }
 
   req |>
-    cnbs_perform() |> # nolint: object_usage_linter.
-    cnbs_response_tibble( # nolint: object_usage_linter.
+    cnbs_perform() |>
+    cnbs_response_tibble(
       empty = empty_codigo_pdm_classe()
     )
 }
