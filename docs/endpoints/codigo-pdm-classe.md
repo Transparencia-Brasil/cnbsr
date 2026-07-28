@@ -9,7 +9,7 @@
 - Descrição: recuperação de dados de PDM por código de PDM ou de classe.
 
 | Parâmetro da API | Tipo | Obrigatório | Argumento no pacote |
-|---|---|---:|---|
+| --- | --- | ---: | --- |
 | `codigoPdmClasse` | inteiro de 32 bits | sim | `codigo_pdm_classe` |
 | `buscaClasse` | lógico | não | `busca_classe` |
 | `buscaPdm` | lógico | não | `busca_pdm` |
@@ -24,7 +24,7 @@ Uma resposta bem-sucedida possui status `200` e um array JSON. Cada item pode
 conter os campos abaixo, preservados sem renomeação pelo pacote:
 
 | Campo | Tipo observado |
-|---|---|
+| --- | --- |
 | `codigoPDM` | inteiro |
 | `codigoPdm` | inteiro |
 | `codigoClasse` | inteiro |
