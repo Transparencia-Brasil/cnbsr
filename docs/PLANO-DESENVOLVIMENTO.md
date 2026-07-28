@@ -12,6 +12,7 @@ Catálogo Nacional de Bens e Serviços (CNBS).
 | `GET /material/v1/palavra` | `get_busca_material_por_palavra()` | `0.0.0.9001` |
 | `GET /material/v1/materialCaracteristicaValorPdmSemFiltro` | `get_material_caracteristica_valor_pdm_sem_filtro()` | `0.0.0.9002` |
 | `GET /material/v1/dadosbasicospdmporcodigo` | `get_dados_basicos_pdm_por_codigo()` | `0.0.0.9003` |
+| `GET /material/v1/dadosItemMaterialporCodigo` | `get_dados_item_material_por_codigo()` | `0.0.0.9004` |
 
 Os demais casos de uso e endpoints do MVP continuam sendo acompanhados pelas
 issues abaixo. A incorporação parcial de um endpoint não conclui, por si só,
