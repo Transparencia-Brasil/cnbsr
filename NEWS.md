@@ -1,5 +1,7 @@
 # cnbsr 0.0.0.9002
 
+- Adiciona um snippet de uso para consultar itens, características e valores
+  por PDM e explorar a coluna-lista retornada pela API.
 - Adiciona `get_material_caracteristica_valor_pdm_sem_filtro()` para recuperar
   itens, características e valores associados a um código de PDM.
 - Preserva as características de cada item na coluna-lista

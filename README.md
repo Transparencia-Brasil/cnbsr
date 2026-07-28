@@ -29,6 +29,9 @@ get_codigo_pdm_classe(6505)
 get_material_caracteristica_valor_pdm_sem_filtro(348)
 ```
 
+Um exemplo completo, incluindo a inspeção das características aninhadas,
+está em [`docs/snippets/material-caracteristica-valor-pdm-sem-filtro.R`](docs/snippets/material-caracteristica-valor-pdm-sem-filtro.R).
+
 ## Endpoints disponíveis
 
 | Endpoint | Função | Contrato |
