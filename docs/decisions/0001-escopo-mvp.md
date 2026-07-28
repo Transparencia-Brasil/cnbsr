@@ -50,6 +50,12 @@ concluída depois que esse levantamento confirmar que os casos de uso aprovados
 podem ser atendidos. A interface pública será definida na issue #2 após essa
 confirmação.
 
+O levantamento foi concluído em 28 de julho de 2026. A
+[matriz de endpoints](../endpoints/matriz-material-0.1.0.md) seleciona seis
+operações `GET`, confirma o atendimento dos casos de uso e registra os demais
+endpoints como adiados ou excluídos. A interface resultante está formalizada na
+[decisão 0002](0002-interface-publica-0.1.0.md).
+
 ## Consequências
 
 - A implementação permanece restrita a Materiais.
