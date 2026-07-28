@@ -11,20 +11,32 @@ hierarquia do catálogo. Os resultados serão retornados como `tibble` e a
 paginação será controlada por página e tamanho, sem obtenção automática de
 todas as páginas.
 
-A estrutura de desenvolvimento, testes e integração contínua já está
-preparada, mas as funções de consulta e seus contratos públicos ainda não foram
-implementados. As decisões aprovadas estão registradas em
+A estrutura de desenvolvimento, testes e integração contínua está preparada.
+As funções incorporadas possuem contratos públicos documentados, e as decisões
+aprovadas estão registradas em
 [`docs/decisions/0001-escopo-mvp.md`](docs/decisions/0001-escopo-mvp.md).
 
 ## Estado do projeto
 
-O projeto está em fase inicial. A primeira consulta disponível recupera PDMs
-por código de PDM ou de classe. Os demais endpoints de Materiais e a interface
-pública restante ainda serão definidos e implementados.
+O projeto está em fase inicial. Já estão disponíveis consultas de materiais por
+palavra e de PDMs por código de PDM ou de classe. Os demais endpoints de
+Materiais e a interface pública restante ainda serão definidos e implementados.
 
 ```r
+get_busca_material_por_palavra("caneta")
 get_codigo_pdm_classe(6505)
 ```
+
+## Endpoints disponíveis
+
+| Endpoint | Função | Contrato |
+| --- | --- | --- |
+| `GET /material/v1/palavra` | `get_busca_material_por_palavra()` | [Busca por palavra](docs/endpoints/busca-material-por-palavra.md) |
+| `GET /material/v1/codigoPdmClasse` | `get_codigo_pdm_classe()` | [Busca por código de PDM ou classe](docs/endpoints/codigo-pdm-classe.md) |
+
+Cada endpoint incorporado corresponde a uma nova versão de desenvolvimento do
+pacote e deve ser acompanhado por contrato, documentação, testes e atualização
+das issues relacionadas.
 
 ## Instalação para desenvolvimento
 

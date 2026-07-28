@@ -93,7 +93,7 @@ test_that("uma resposta vazia mantém o esquema estável", {
 
   expect_s3_class(result, "tbl_df")
   expect_equal(nrow(result), 0L)
-  expect_identical(result, empty_codigo_pdm_classe())
+  expect_identical(result, empty_elastic_pdm())
 })
 
 test_that("os argumentos são validados antes da requisição", {

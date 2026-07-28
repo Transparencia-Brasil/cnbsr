@@ -9,7 +9,9 @@
 5. Antes de enviar uma contribuição, execute os testes, atualize a documentação
    e rode `R CMD check`.
 6. Nunca inclua tokens, credenciais, segredos ou dados sensíveis.
+7. Ao incorporar um endpoint, documente seu contrato em `docs/endpoints/`,
+   atualize o inventário do README, a documentação roxygen, os testes mockados,
+   o `NEWS.md`, a versão do pacote e o progresso das issues relacionadas.
 
 Abra uma issue antes de propor uma mudança que altere a interface pública ou o
 escopo do pacote.
-

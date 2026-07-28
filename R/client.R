@@ -23,7 +23,7 @@ cnbs_perform <- function(req) {
   )
 }
 
-cnbs_response_tibble <- function(resp, empty = empty_codigo_pdm_classe()) {
+cnbs_response_tibble <- function(resp, empty) {
   body_text <- tryCatch(
     httr2::resp_body_string(resp),
     error = function(cnd) {

@@ -32,23 +32,6 @@ check_optional_flag <- function(x, arg) {
   x
 }
 
-empty_codigo_pdm_classe <- function() {
-  tibble::tibble(
-    codigoPDM = integer(),
-    codigoPdm = integer(),
-    codigoClasse = integer(),
-    codigoGrupo = integer(),
-    descricaoPDM = character(),
-    nomePdm = character(),
-    descricaoClasse = character(),
-    nomeClasse = character(),
-    descricaoGrupo = character(),
-    statusPDM = logical(),
-    statusClasse = logical(),
-    statusGrupo = logical()
-  )
-}
-
 #' Recuperar PDMs por código de PDM ou de classe
 #'
 #' Consulta o endpoint `codigoPdmClasse` do catálogo de Materiais do CNBS. A
@@ -94,6 +77,6 @@ get_codigo_pdm_classe <- function(
   req |>
     cnbs_perform() |>
     cnbs_response_tibble(
-      empty = empty_codigo_pdm_classe()
+      empty = empty_elastic_pdm()
     )
 }

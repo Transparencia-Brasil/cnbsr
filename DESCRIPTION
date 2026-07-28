@@ -1,13 +1,14 @@
 Package: cnbsr
 Title: Consulta ao Catálogo Nacional de Bens e Serviços
-Version: 0.0.0.9000
+Version: 0.0.0.9001
 Authors@R: 
     person("Raul", "Durlo", , "durlo.raul@gmail.com", role = c("aut", "cre"))
 Author: Raul Durlo [aut, cre]
 Maintainer: Raul Durlo <durlo.raul@gmail.com>
 Description: Permite consultar o Catálogo Nacional de Bens e Serviços (CNBS)
     a partir do R. O escopo inicial está restrito ao catálogo de Materiais e
-    inclui a recuperação de PDMs por código de PDM ou de classe.
+    inclui buscas por palavra e a recuperação de PDMs por código de PDM ou de
+    classe.
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
