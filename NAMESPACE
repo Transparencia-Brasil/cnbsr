@@ -2,5 +2,6 @@
 
 export(get_busca_material_por_palavra)
 export(get_codigo_pdm_classe)
+export(get_material_caracteristica_valor_pdm_sem_filtro)
 importFrom(httr2,request)
 importFrom(tibble,tibble)
