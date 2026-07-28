@@ -27,6 +27,9 @@ português brasileiro.
 - Escreva testes com `testthat`, usando mocks, fixtures ou respostas gravadas
   quando apropriado. Os testes não podem depender exclusivamente da
   disponibilidade da API real.
+- Para cada novo endpoint, documente o contrato em `docs/endpoints/`, atualize
+  o inventário do README, a documentação roxygen, os testes mockados, o
+  `NEWS.md`, a versão do pacote e o progresso das issues relacionadas.
 - Antes de considerar uma tarefa concluída, execute os testes, atualize a
   documentação e rode `R CMD check`.
 - Informe todos os warnings, notes, erros e verificações que não puderem ser

@@ -4,6 +4,17 @@ Este documento organiza o desenvolvimento da primeira versão funcional do
 `cnbsr`. O escopo inicial está restrito ao catálogo de **Materiais** do
 Catálogo Nacional de Bens e Serviços (CNBS).
 
+## Estado atual dos endpoints
+
+| Endpoint incorporado | Função pública | Versão |
+| --- | --- | --- |
+| `GET /material/v1/codigoPdmClasse` | `get_codigo_pdm_classe()` | `0.0.0.9000` |
+| `GET /material/v1/palavra` | `get_busca_material_por_palavra()` | `0.0.0.9001` |
+
+Os demais casos de uso e endpoints do MVP continuam sendo acompanhados pelas
+issues abaixo. A incorporação parcial de um endpoint não conclui, por si só,
+uma macroatividade cujo critério de aceite abrange todo o MVP.
+
 ## Fluxo de acompanhamento
 
 O andamento será gerenciado pelas issues do GitHub. Cada macroatividade deve
