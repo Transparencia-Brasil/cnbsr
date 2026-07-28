@@ -54,15 +54,27 @@ cast_tupla_caracteristica <- function(value) {
     return(character())
   }
   valid <- is.list(value) &&
-    all(vapply(value, is.character, logical(1))) &&
-    all(lengths(value) == 1L)
+    all(vapply(
+      value,
+      function(element) {
+        is.null(element) ||
+          (is.character(element) && length(element) == 1L)
+      },
+      logical(1)
+    ))
   if (!valid) {
     cnbs_schema_error(
       "uma tabela aninhada",
       "o campo 'tuplaCaracteristica' n\u00e3o \u00e9 uma lista de textos"
     )
   }
-  unlist(value, use.names = FALSE)
+  vapply(
+    value,
+    function(element) {
+      if (is.null(element)) NA_character_ else element
+    },
+    character(1)
+  )
 }
 
 cast_busca_item_caracteristica <- function(value) {

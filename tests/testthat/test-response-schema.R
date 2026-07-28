@@ -26,7 +26,7 @@ nested_characteristic_record <- function() {
     nomeValorCaracteristica = "Comprimido",
     siglaUnidadeMedida = NULL,
     statusValorCaracteristica = TRUE,
-    tuplaCaracteristica = list("BR000001", "BR000010")
+    tuplaCaracteristica = list("BR000001", "BR000010", NULL)
   )
 }
 
@@ -152,7 +152,7 @@ test_that("tabelas aninhadas t\u00eam esquema e tupla est\u00e1veis", {
   expect_true(is.na(nested$siglaUnidadeMedida))
   expect_identical(
     nested$tuplaCaracteristica[[1]],
-    c("BR000001", "BR000010")
+    c("BR000001", "BR000010", NA_character_)
   )
 })
 
