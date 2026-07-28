@@ -34,6 +34,51 @@ empty_busca_item <- function() {
   )
 }
 
+empty_item_caracteristica <- function() {
+  tibble::tibble(
+    codigoCaracteristica = character(),
+    codigoValorCaracteristica = character(),
+    nomeCaracteristica = character(),
+    caracteristicaObrigatoria = logical(),
+    statusCaracteristica = logical(),
+    numeroCaracteristica = integer(),
+    nomeValorCaracteristica = character(),
+    siglaUnidadeMedida = character(),
+    statusValorCaracteristica = logical(),
+    tuplaCaracteristica = list()
+  )
+}
+
+cast_tupla_caracteristica <- function(value) {
+  if (is.null(value)) {
+    return(character())
+  }
+  valid <- is.list(value) &&
+    all(vapply(value, is.character, logical(1))) &&
+    all(lengths(value) == 1L)
+  if (!valid) {
+    cnbs_schema_error(
+      "uma tabela aninhada",
+      "o campo 'tuplaCaracteristica' n\u00e3o \u00e9 uma lista de textos"
+    )
+  }
+  unlist(value, use.names = FALSE)
+}
+
+cast_busca_item_caracteristica <- function(value) {
+  if (is.null(value)) {
+    return(empty_item_caracteristica())
+  }
+  cnbs_records_tibble(
+    value,
+    prototype = empty_item_caracteristica(),
+    context = "uma tabela aninhada",
+    transformers = list(
+      tuplaCaracteristica = cast_tupla_caracteristica
+    )
+  )
+}
+
 #' Recuperar itens, características e valores por PDM
 #'
 #' Consulta o endpoint `materialCaracteristicaValorPdmSemFiltro` do catálogo
@@ -60,6 +105,9 @@ get_material_caracteristica_valor_pdm_sem_filtro <- function(codigo_pdm) { # nol
     httr2::req_url_query(codigo_pdm = codigo_pdm) |>
     cnbs_perform() |>
     cnbs_response_tibble(
-      empty = empty_busca_item()
+      empty = empty_busca_item(),
+      transformers = list(
+        buscaItemCaracteristica = cast_busca_item_caracteristica
+      )
     )
 }
