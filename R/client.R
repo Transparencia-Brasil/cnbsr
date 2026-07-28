@@ -23,7 +23,7 @@ cnbs_perform <- function(req) {
   )
 }
 
-cnbs_response_tibble <- function(resp, empty) {
+cnbs_response_tibble <- function(resp, empty = empty_codigo_pdm_classe()) {
   body_text <- tryCatch(
     httr2::resp_body_string(resp),
     error = function(cnd) {
@@ -51,6 +51,7 @@ cnbs_response_tibble <- function(resp, empty) {
   )
 
   if (identical(trimws(body_text), "[]")) {
+    message("A consulta \u00e0 API do CNBS retornou zero resultados.")
     return(empty)
   }
 
