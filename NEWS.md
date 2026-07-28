@@ -1,3 +1,10 @@
+# cnbsr 0.0.0.9005
+
+- Adiciona `get_dados_item_material_por_codigo_siasgnet()` para recuperar o
+  nome e os indicadores de um item de material para o SIASGnet.
+- Mantém falhas HTTP do endpoint como erros informativos, inclusive o status
+  `500` observado para códigos inexistentes.
+
 # cnbsr 0.0.0.9004
 
 - Adiciona `get_dados_item_material_por_codigo()` para recuperar a descrição
