@@ -1,6 +1,6 @@
 Package: cnbsr
-Title: Consulta ao Catálogo Nacional de Bens e Serviços
-Version: 0.0.0.9005
+Title: Consulta Ao Catálogo Nacional De Bens e Serviços
+Version: 0.1.0
 Authors@R: 
     person("Raul", "Durlo", , "durlo.raul@gmail.com", role = c("aut", "cre"))
 Author: Raul Durlo [aut, cre]
@@ -20,9 +20,12 @@ Imports:
     tibble
 Suggests:
     covr,
+    knitr,
     lintr,
+    rmarkdown,
     roxygen2,
     styler,
     testthat (>= 3.0.0)
+VignetteBuilder: knitr
 Config/testthat/edition: 3
 Config/roxygen2/version: 8.0.0
