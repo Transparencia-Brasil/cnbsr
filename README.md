@@ -19,15 +19,16 @@ aprovadas estão registradas em
 ## Estado do projeto
 
 O projeto está em fase inicial. Já estão disponíveis consultas de materiais por
-palavra, de PDMs por código de PDM ou de classe, de dados básicos de PDM e de
-itens, características e valores por código de PDM. Os demais endpoints de
-Materiais e a interface pública restante ainda serão definidos e
-implementados.
+palavra, de PDMs por código de PDM ou de classe, de dados básicos de PDM, da
+descrição de itens e de itens, características e valores por código de PDM. Os
+demais endpoints de Materiais e a interface pública restante ainda serão
+definidos e implementados.
 
 ```r
 get_busca_material_por_palavra("caneta")
 get_codigo_pdm_classe(6505)
 get_dados_basicos_pdm_por_codigo(17708)
+get_dados_item_material_por_codigo(267203)
 get_material_caracteristica_valor_pdm_sem_filtro(348)
 ```
 
@@ -38,6 +39,7 @@ get_material_caracteristica_valor_pdm_sem_filtro(348)
 | `GET /material/v1/palavra` | `get_busca_material_por_palavra()` | [Busca por palavra](docs/endpoints/busca-material-por-palavra.md) |
 | `GET /material/v1/codigoPdmClasse` | `get_codigo_pdm_classe()` | [Busca por código de PDM ou classe](docs/endpoints/codigo-pdm-classe.md) |
 | `GET /material/v1/dadosbasicospdmporcodigo` | `get_dados_basicos_pdm_por_codigo()` | [Dados básicos de PDM por código](docs/endpoints/dados-basicos-pdm-por-codigo.md) |
+| `GET /material/v1/dadosItemMaterialporCodigo` | `get_dados_item_material_por_codigo()` | [Descrição de item por código](docs/endpoints/dados-item-material-por-codigo.md) |
 | `GET /material/v1/materialCaracteristicaValorPdmSemFiltro` | `get_material_caracteristica_valor_pdm_sem_filtro()` | [Itens, características e valores por PDM](docs/endpoints/material-caracteristica-valor-pdm-sem-filtro.md) |
 
 Cada endpoint incorporado corresponde a uma nova versão de desenvolvimento do

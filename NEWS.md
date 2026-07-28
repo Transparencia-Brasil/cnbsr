@@ -1,3 +1,10 @@
+# cnbsr 0.0.0.9004
+
+- Adiciona `get_dados_item_material_por_codigo()` para recuperar a descrição
+  completa de um item de material pelo código.
+- Interpreta a resposta `{"descricaoItem": null}` como resultado vazio e
+  preserva o esquema `DescricaoItem`.
+
 # cnbsr 0.0.0.9003
 
 - Adiciona `get_dados_basicos_pdm_por_codigo()` para recuperar dados básicos e
