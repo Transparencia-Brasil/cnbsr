@@ -1,4 +1,5 @@
 on:
+  pull_request:
   workflow_dispatch:
 
 name: coverage
@@ -20,6 +21,15 @@ jobs:
         run: |
           coverage <- covr::package_coverage()
           print(coverage)
+          percentage <- covr::percent_coverage(coverage)
+          if (percentage < 90) {
+            stop(
+              sprintf(
+                "Cobertura %.2f%% abaixo do mínimo de 90%%.",
+                percentage
+              )
+            )
+          }
           covr::report(coverage, file = "coverage.html")
         shell: Rscript {0}
       - uses: actions/upload-artifact@v4
