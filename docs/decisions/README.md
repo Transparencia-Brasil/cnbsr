@@ -13,6 +13,8 @@ status.
 - [0002 — Interface pública do MVP 0.1.0](0002-interface-publica-0.1.0.md):
   consolida as seis funções exportadas e os contratos de validação, retorno,
   paginação e erros.
+- [0003 — Interface de características por PDM na versão 0.1.1](0003-interface-caracteristicas-pdm-0.1.1.md):
+  incorpora o sétimo endpoint e preserva a função pública da versão 0.1.0.
 
 O levantamento de endpoints incluídos, adiados e excluídos está na
-[matriz de Materiais da versão 0.1.0](../endpoints/matriz-material-0.1.0.md).
+[matriz de Materiais da versão 0.1.1](../endpoints/matriz-material-0.1.1.md).

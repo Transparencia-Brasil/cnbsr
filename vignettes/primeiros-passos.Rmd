@@ -24,7 +24,7 @@ para uma sessão interativa.
 
 ```r
 install.packages("pak")
-pak::pak("rdurl0/cnbsr@v0.1.0")
+pak::pak("rdurl0/cnbsr@v0.1.1")
 
 library(cnbsr)
 ```
@@ -69,7 +69,7 @@ hierarquia <- get_dados_basicos_pdm_por_codigo(17708)
 hierarquia
 ```
 
-Os endpoints selecionados para a versão 0.1.0 não possuem parâmetros de
+Os endpoints selecionados para a versão 0.1.1 não possuem parâmetros de
 paginação.
 
 ## Ler características aninhadas
@@ -78,7 +78,8 @@ Itens e características de um PDM são retornados juntos. Cada linha representa
 um item; `buscaItemCaracteristica` é uma coluna-lista de tabelas:
 
 ```r
-itens <- get_material_caracteristica_valor_pdm_sem_filtro(348)
+itens <- get_material_caracteristica_valor_pdm(348, com_filtro = TRUE)
+itens_sem_filtro <- get_material_caracteristica_valor_pdm_sem_filtro(348)
 
 itens[, c("codigoItem", "nomePdm", "statusItem")]
 caracteristicas <- itens$buscaItemCaracteristica[[1]]
