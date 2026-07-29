@@ -15,9 +15,10 @@ Catálogo Nacional de Bens e Serviços (CNBS).
 | `GET /material/v1/dadosItemMaterialporCodigo` | `get_dados_item_material_por_codigo()` | `0.0.0.9004` |
 | `GET /material/v1/dadosItemMaterialporCodigoSiasgnet` | `get_dados_item_material_por_codigo_siasgnet()` | `0.0.0.9005` |
 
-Os demais casos de uso e endpoints do MVP continuam sendo acompanhados pelas
-issues abaixo. A incorporação parcial de um endpoint não conclui, por si só,
-uma macroatividade cujo critério de aceite abrange todo o MVP.
+Os seis endpoints selecionados para o MVP estão implementados. A
+[matriz da versão 0.1.0](endpoints/matriz-material-0.1.0.md) registra todos os
+endpoints de Materiais observados no OpenAPI e distingue os incluídos, adiados e
+excluídos.
 
 ## Fluxo de acompanhamento
 
@@ -35,6 +36,10 @@ arquitetura, interface pública, dependências ou escopo devem ser registradas e
 | 5 | Padronizar as respostas | [#4](https://github.com/rdurl0/cnbsr/issues/4) | Dados retornados como estruturas estáveis no R |
 | 6 | Testar, documentar e preparar a versão | [#5](https://github.com/rdurl0/cnbsr/issues/5) | Pacote verificado e pronto para 0.1.0 |
 
+As macroatividades 1 a 5 possuem entregáveis implementados e documentados. A
+macroatividade 6 será concluída com os checks finais e a publicação da versão
+0.1.0.
+
 ## Estados sugeridos
 
 - **Backlog:** atividade ainda não iniciada.
@@ -47,9 +52,8 @@ como colunas do quadro.
 
 ## Regras de trabalho
 
-1. Iniciar pela issue #7.
-2. Não implementar funções públicas antes de concluir o levantamento da API e
-   aprovar a interface.
+1. Manter o escopo aprovado nas decisões 0001 e 0002.
+2. Não incorporar novos endpoints sem atualizar a matriz e aprovar a interface.
 3. Relacionar commits e pull requests à issue correspondente.
 4. Atualizar checklists conforme cada entrega for validada.
 5. Registrar decisões duradouras em `docs/decisions/`.

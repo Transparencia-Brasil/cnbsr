@@ -21,9 +21,9 @@ Um \code{tibble} com todos os registros e campos retornados pela API. Uma
 consulta válida sem resultados retorna zero linhas e as mesmas 12 colunas.
 }
 \description{
-Consulta o endpoint \code{codigoPdmClasse} do catálogo de Materiais do CNBS. A
-resposta é preservada como fornecida pela API, sem renomear, filtrar,
-ordenar ou normalizar campos.
+Consulta o endpoint \code{codigoPdmClasse} do catálogo de Materiais do CNBS. O
+retorno segue o esquema público \code{ElasticPdm}, com nomes, ordem e tipos
+estáveis.
 }
 \examples{
 \dontrun{

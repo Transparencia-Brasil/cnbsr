@@ -23,7 +23,150 @@ cnbs_perform <- function(req) {
   )
 }
 
-cnbs_response_tibble <- function(resp, empty) {
+cnbs_schema_error <- function(context, detail) {
+  stop(
+    sprintf(
+      paste0(
+        "A API do CNBS retornou uma estrutura incompat\u00edvel ",
+        "com %s: %s."
+      ),
+      context,
+      detail
+    ),
+    call. = FALSE
+  )
+}
+
+cnbs_validate_fields <- function(value, prototype, context) {
+  actual <- names(value)
+  expected <- names(prototype)
+
+  if (is.null(actual) || anyDuplicated(actual)) {
+    cnbs_schema_error(
+      context,
+      "os campos n\u00e3o possuem nomes \u00fanicos"
+    )
+  }
+
+  missing <- setdiff(expected, actual)
+  extra <- setdiff(actual, expected)
+  if (length(missing) || length(extra)) {
+    details <- character()
+    if (length(missing)) {
+      details <- c(
+        details,
+        sprintf("campos ausentes: %s", paste(missing, collapse = ", "))
+      )
+    }
+    if (length(extra)) {
+      details <- c(
+        details,
+        sprintf("campos extras: %s", paste(extra, collapse = ", "))
+      )
+    }
+    cnbs_schema_error(context, paste(details, collapse = "; "))
+  }
+}
+
+cnbs_cast_scalar <- function(value, prototype, field, context) {
+  if (is.null(value)) {
+    return(prototype[NA_integer_])
+  }
+  if (length(value) != 1L || is.list(value)) {
+    cnbs_schema_error(
+      context,
+      sprintf("o campo '%s' n\u00e3o \u00e9 escalar", field)
+    )
+  }
+
+  target <- typeof(prototype)
+  valid <- switch(
+    target,
+    integer = is.numeric(value) &&
+      (is.na(value) || (
+        is.finite(value) &&
+          value == floor(value) &&
+          value >= -.Machine$integer.max - 1 &&
+          value <= .Machine$integer.max
+      )),
+    double = is.numeric(value),
+    logical = is.logical(value),
+    character = is.character(value),
+    FALSE
+  )
+  if (!valid) {
+    cnbs_schema_error(
+      context,
+      sprintf(
+        "o campo '%s' n\u00e3o pode ser convertido para %s",
+        field,
+        target
+      )
+    )
+  }
+
+  switch(
+    target,
+    integer = as.integer(value),
+    double = as.double(value),
+    logical = as.logical(value),
+    character = as.character(value)
+  )
+}
+
+cnbs_cast_record <- function(
+  value,
+  prototype,
+  context,
+  transformers = list()
+) {
+  if (!is.list(value) || is.data.frame(value)) {
+    cnbs_schema_error(context, "um registro n\u00e3o \u00e9 um objeto JSON")
+  }
+  cnbs_validate_fields(value, prototype, context)
+
+  result <- lapply(names(prototype), function(field) {
+    if (field %in% names(transformers)) {
+      return(transformers[[field]](value[[field]]))
+    }
+    cnbs_cast_scalar(value[[field]], prototype[[field]], field, context)
+  })
+  names(result) <- names(prototype)
+  result
+}
+
+cnbs_records_tibble <- function(
+  records,
+  prototype,
+  context = "uma tabela",
+  transformers = list()
+) {
+  if (!is.list(records) || !is.null(names(records))) {
+    cnbs_schema_error(context, "a resposta n\u00e3o \u00e9 um array JSON")
+  }
+  if (!length(records)) {
+    return(prototype)
+  }
+
+  cast <- lapply(
+    records,
+    cnbs_cast_record,
+    prototype = prototype,
+    context = context,
+    transformers = transformers
+  )
+  columns <- lapply(names(prototype), function(field) {
+    values <- lapply(cast, function(record) record[[field]])
+    if (is.list(prototype[[field]])) {
+      return(values)
+    }
+    vapply(values, identity, prototype[[field]][NA_integer_])
+  })
+  names(columns) <- names(prototype)
+  tibble::as_tibble(columns, .name_repair = "minimal")
+}
+
+cnbs_response_tibble <- function(resp, empty, transformers = list()) {
   body_text <- tryCatch(
     httr2::resp_body_string(resp),
     error = function(cnd) {
@@ -38,7 +181,7 @@ cnbs_response_tibble <- function(resp, empty) {
   )
 
   body <- tryCatch(
-    httr2::resp_body_json(resp, simplifyVector = TRUE),
+    httr2::resp_body_json(resp, simplifyVector = FALSE),
     error = function(cnd) {
       stop(
         sprintf(
@@ -55,14 +198,11 @@ cnbs_response_tibble <- function(resp, empty) {
     return(empty)
   }
 
-  if (!is.data.frame(body)) {
-    stop(
-      "A API do CNBS retornou uma estrutura incompat\u00edvel com uma tabela.",
-      call. = FALSE
-    )
-  }
-
-  tibble::as_tibble(body, .name_repair = "minimal")
+  cnbs_records_tibble(
+    body,
+    prototype = empty,
+    transformers = transformers
+  )
 }
 
 cnbs_response_object_tibble <- function(resp, empty) {
@@ -90,7 +230,7 @@ cnbs_response_object_tibble <- function(resp, empty) {
   }
 
   body <- tryCatch(
-    httr2::resp_body_json(resp, simplifyVector = TRUE),
+    httr2::resp_body_json(resp, simplifyVector = FALSE),
     error = function(cnd) {
       stop(
         sprintf(
@@ -102,53 +242,21 @@ cnbs_response_object_tibble <- function(resp, empty) {
     }
   )
 
-  valid_object <- is.list(body) &&
-    !is.data.frame(body) &&
-    !is.null(names(body)) &&
-    setequal(names(body), names(empty))
-
-  if (!valid_object) {
-    stop(
-      paste0(
-        "A API do CNBS retornou uma estrutura incompat\u00edvel ",
-        "com um objeto."
-      ),
-      call. = FALSE
-    )
+  if (!is.list(body) || is.null(names(body))) {
+    cnbs_schema_error("um objeto", "a resposta n\u00e3o \u00e9 um objeto JSON")
   }
-
   if (all(vapply(body, is.null, logical(1)))) {
+    cnbs_validate_fields(body, empty, "um objeto")
     message("A consulta \u00e0 API do CNBS retornou zero resultados.")
     return(empty)
   }
 
-  values <- lapply(names(empty), function(name) {
-    value <- body[[name]]
-    prototype <- empty[[name]]
-
-    if (is.null(value)) {
-      return(prototype[NA_integer_])
-    }
-    if (length(value) != 1L || is.list(value)) {
-      stop(
-        paste0(
-          "A API do CNBS retornou uma estrutura incompat\u00edvel ",
-          "com um objeto."
-        ),
-        call. = FALSE
-      )
-    }
-
-    switch(
-      typeof(prototype),
-      integer = as.integer(value),
-      double = as.double(value),
-      logical = as.logical(value),
-      character = as.character(value),
-      value
-    )
-  })
-  names(values) <- names(empty)
-
-  tibble::as_tibble(values, .name_repair = "minimal")
+  values <- cnbs_cast_record(
+    body,
+    prototype = empty,
+    context = "um objeto"
+  )
+  columns <- lapply(names(empty), function(field) values[[field]])
+  names(columns) <- names(empty)
+  tibble::as_tibble(columns, .name_repair = "minimal")
 }

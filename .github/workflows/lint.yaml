@@ -16,8 +16,15 @@ jobs:
           use-public-rspm: true
       - uses: r-lib/actions/setup-r-dependencies@v2
         with:
-          extra-packages: any::lintr
+          extra-packages: |
+            any::devtools
+            any::lintr
       - name: Run lintr
-        run: lintr::lint_package()
+        run: |
+          devtools::load_all(quiet = TRUE)
+          findings <- lintr::lint_package()
+          print(findings)
+          if (length(findings)) {
+            stop("Lint encontrou problemas.")
+          }
         shell: Rscript {0}
-

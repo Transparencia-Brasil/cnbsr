@@ -24,9 +24,8 @@ check_optional_text <- function(x, arg) {
 
 #' Buscar materiais por palavra
 #'
-#' Consulta o endpoint `palavra` do catálogo de Materiais do CNBS. A resposta
-#' é preservada como fornecida pela API, sem renomear, filtrar, ordenar ou
-#' normalizar campos.
+#' Consulta o endpoint `palavra` do catálogo de Materiais do CNBS. O retorno
+#' segue o esquema público `ElasticPdm`, com nomes, ordem e tipos estáveis.
 #'
 #' @param palavra Texto não vazio usado na busca por materiais.
 #' @param apenas_ativos `NULL` ou texto não vazio. Quando diferente de `NULL`,

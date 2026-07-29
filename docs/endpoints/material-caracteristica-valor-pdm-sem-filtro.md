@@ -50,7 +50,7 @@ uma tabela com estes campos:
 | `nomeValorCaracteristica` | texto |
 | `siglaUnidadeMedida` | texto |
 | `statusValorCaracteristica` | lógico |
-| `tuplaCaracteristica` | lista de textos |
+| `tuplaCaracteristica` | lista de textos, com valores ausentes permitidos |
 
 Campos sem valor podem ser retornados como `null` pela API e são preservados
 como valores ausentes no R. Em 28 de julho de 2026, o PDM `348` retornou dez

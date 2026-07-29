@@ -17,8 +17,23 @@ jobs:
       - uses: r-lib/actions/setup-r@v2
         with:
           use-public-rspm: true
+      - uses: r-lib/actions/setup-tinytex@v2
       - uses: r-lib/actions/setup-r-dependencies@v2
         with:
           extra-packages: any::rcmdcheck
           needs: check
       - uses: r-lib/actions/check-r-package@v2
+        with:
+          args: 'c("--as-cran")'
+      - name: Build release artifacts
+        run: |
+          R CMD build .
+          R CMD Rd2pdf . --output=cnbsr-manual.pdf
+          sha256sum cnbsr_*.tar.gz cnbsr-manual.pdf > SHA256SUMS
+      - uses: actions/upload-artifact@v4
+        with:
+          name: cnbsr-release-artifacts
+          path: |
+            cnbsr_*.tar.gz
+            cnbsr-manual.pdf
+            SHA256SUMS

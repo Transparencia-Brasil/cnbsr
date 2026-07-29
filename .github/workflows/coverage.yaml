@@ -1,4 +1,5 @@
 on:
+  pull_request:
   workflow_dispatch:
 
 name: coverage
@@ -15,11 +16,22 @@ jobs:
           use-public-rspm: true
       - uses: r-lib/actions/setup-r-dependencies@v2
         with:
-          extra-packages: any::covr
+          extra-packages: |
+            any::covr
+            any::DT
       - name: Measure coverage
         run: |
           coverage <- covr::package_coverage()
           print(coverage)
+          percentage <- covr::percent_coverage(coverage)
+          if (percentage < 90) {
+            stop(
+              sprintf(
+                "Cobertura %.2f%% abaixo do mínimo de 90%%.",
+                percentage
+              )
+            )
+          }
           covr::report(coverage, file = "coverage.html")
         shell: Rscript {0}
       - uses: actions/upload-artifact@v4

@@ -1,0 +1,103 @@
+---
+title: "Primeiros passos com o cnbsr"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Primeiros passos com o cnbsr}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  eval = FALSE
+)
+```
+
+O `cnbsr` oferece uma interface reproduzível para consultar o catálogo de
+Materiais do CNBS. As chamadas desta vignette não são executadas durante o
+`R CMD check` porque dependem de um serviço externo, mas podem ser copiadas
+para uma sessão interativa.
+
+## Instalação e carregamento
+
+```r
+install.packages("pak")
+pak::pak("rdurl0/cnbsr@v0.1.0")
+
+library(cnbsr)
+```
+
+## Pesquisar materiais
+
+Use a busca textual para localizar PDMs relacionados a um termo:
+
+```r
+materiais <- get_busca_material_por_palavra("caneta")
+materiais
+```
+
+O retorno usa o esquema `ElasticPdm`. Uma busca válida sem ocorrências
+retorna as mesmas colunas com zero linhas.
+
+## Consultar um item por código
+
+A descrição e os indicadores operacionais do item são expostos por contratos
+separados da API:
+
+```r
+descricao <- get_dados_item_material_por_codigo(267203)
+indicadores <- get_dados_item_material_por_codigo_siasgnet(267203)
+
+descricao$descricaoItem
+indicadores
+```
+
+## Navegar pela hierarquia
+
+Uma classe ou PDM pode ser localizada pelo código. Depois, os dados básicos
+mostram sua posição na hierarquia:
+
+```r
+pdms <- get_codigo_pdm_classe(
+  codigo_pdm_classe = 6505,
+  busca_classe = TRUE
+)
+
+hierarquia <- get_dados_basicos_pdm_por_codigo(17708)
+hierarquia
+```
+
+Os endpoints selecionados para a versão 0.1.0 não possuem parâmetros de
+paginação.
+
+## Ler características aninhadas
+
+Itens e características de um PDM são retornados juntos. Cada linha representa
+um item; `buscaItemCaracteristica` é uma coluna-lista de tabelas:
+
+```r
+itens <- get_material_caracteristica_valor_pdm_sem_filtro(348)
+
+itens[, c("codigoItem", "nomePdm", "statusItem")]
+caracteristicas <- itens$buscaItemCaracteristica[[1]]
+caracteristicas
+caracteristicas$tuplaCaracteristica[[1]]
+```
+
+## Respostas vazias e erros
+
+Resultados vazios são tabelas de zero linhas com tipos preservados. Argumentos
+inválidos são rejeitados antes da requisição. Falhas HTTP, JSON inválido e
+campos remotos incompatíveis com o contrato produzem erros informativos:
+
+```r
+resultado <- get_busca_material_por_palavra("termo muito específico")
+nrow(resultado)
+
+try(get_dados_basicos_pdm_por_codigo(-1))
+```
+
+Os testes automatizados usam respostas mockadas e não dependem da
+disponibilidade da API.

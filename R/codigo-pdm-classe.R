@@ -34,9 +34,9 @@ check_optional_flag <- function(x, arg) {
 
 #' Recuperar PDMs por código de PDM ou de classe
 #'
-#' Consulta o endpoint `codigoPdmClasse` do catálogo de Materiais do CNBS. A
-#' resposta é preservada como fornecida pela API, sem renomear, filtrar,
-#' ordenar ou normalizar campos.
+#' Consulta o endpoint `codigoPdmClasse` do catálogo de Materiais do CNBS. O
+#' retorno segue o esquema público `ElasticPdm`, com nomes, ordem e tipos
+#' estáveis.
 #'
 #' @param codigo_pdm_classe Número inteiro positivo correspondente a um código
 #'   de PDM ou de classe.
