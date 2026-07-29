@@ -58,13 +58,38 @@ material_pdm_rows <- function() {
 }
 
 test_that("a URL e o c\u00f3digo do PDM s\u00e3o constru\u00eddos corretamente", {
+  observed_urls <- character()
+  httr2::local_mocked_responses(function(req) {
+    observed_urls <<- c(observed_urls, req$url)
+    httr2::response_json(body = material_pdm_rows())
+  })
+
+  get_material_caracteristica_valor_pdm(348, com_filtro = TRUE)
+  get_material_caracteristica_valor_pdm(348, com_filtro = FALSE)
+
+  expect_equal(
+    observed_urls,
+    c(
+      paste0(
+        cnbs_base_url(),
+        "/materialCaracteristcaValorporPDM?codigo_pdm=348"
+      ),
+      paste0(
+        cnbs_base_url(),
+        "/materialCaracteristicaValorPdmSemFiltro?codigo_pdm=348"
+      )
+    )
+  )
+})
+
+test_that("a função da versão 0.1.0 permanece compatível", {
   observed_url <- NULL
   httr2::local_mocked_responses(function(req) {
     observed_url <<- req$url
     httr2::response_json(body = material_pdm_rows())
   })
 
-  get_material_caracteristica_valor_pdm_sem_filtro(348)
+  result <- get_material_caracteristica_valor_pdm_sem_filtro(348)
 
   expect_equal(
     observed_url,
@@ -73,6 +98,7 @@ test_that("a URL e o c\u00f3digo do PDM s\u00e3o constru\u00eddos corretamente",
       "/materialCaracteristicaValorPdmSemFiltro?codigo_pdm=348"
     )
   )
+  expect_s3_class(result, "tbl_df")
 })
 
 test_that("a resposta preserva itens e a estrutura aninhada", {
@@ -83,7 +109,7 @@ test_that("a resposta preserva itens e a estrutura aninhada", {
     )
   })
 
-  result <- get_material_caracteristica_valor_pdm_sem_filtro(348)
+  result <- get_material_caracteristica_valor_pdm(348, com_filtro = TRUE)
 
   expect_s3_class(result, "tbl_df")
   expect_equal(nrow(result), 2L)
@@ -111,7 +137,7 @@ test_that("campos nulos s\u00e3o preservados como ausentes", {
     )
   })
 
-  result <- get_material_caracteristica_valor_pdm_sem_filtro(348)
+  result <- get_material_caracteristica_valor_pdm(348, com_filtro = TRUE)
 
   expect_true(is.na(result$codigoNcm[[2]]))
   expect_true(is.na(
@@ -124,7 +150,10 @@ test_that("uma resposta vazia mant\u00e9m o esquema BuscaItem", {
     httr2::response_json(url = req$url, body = list())
   })
 
-  result <- get_material_caracteristica_valor_pdm_sem_filtro(99999999)
+  result <- get_material_caracteristica_valor_pdm(
+    99999999,
+    com_filtro = FALSE
+  )
 
   expect_s3_class(result, "tbl_df")
   expect_equal(nrow(result), 0L)
@@ -136,8 +165,20 @@ test_that("codigo_pdm \u00e9 validado antes da requisi\u00e7\u00e3o", {
 
   for (value in invalid_codes) {
     expect_error(
-      get_material_caracteristica_valor_pdm_sem_filtro(value),
+      get_material_caracteristica_valor_pdm(value, com_filtro = TRUE),
       "`codigo_pdm` deve ser um n\u00famero inteiro positivo escalar.",
+      fixed = TRUE
+    )
+  }
+})
+
+test_that("com_filtro é validado antes da requisição", {
+  invalid_filters <- list(NULL, NA, 0, 1, "TRUE", logical(), c(TRUE, FALSE))
+
+  for (value in invalid_filters) {
+    expect_error(
+      get_material_caracteristica_valor_pdm(348, com_filtro = value),
+      "`com_filtro` deve ser um valor lógico escalar não ausente.",
       fixed = TRUE
     )
   }
@@ -153,7 +194,7 @@ test_that("erros HTTP recebem uma mensagem do pacote", {
   })
 
   expect_error(
-    get_material_caracteristica_valor_pdm_sem_filtro(348),
+    get_material_caracteristica_valor_pdm(348, com_filtro = TRUE),
     "Falha ao consultar a API do CNBS",
     fixed = TRUE
   )
@@ -170,7 +211,7 @@ test_that("conte\u00fado n\u00e3o JSON e estruturas incompat\u00edveis produzem 
     )
   })
   expect_error(
-    get_material_caracteristica_valor_pdm_sem_filtro(348),
+    get_material_caracteristica_valor_pdm(348, com_filtro = TRUE),
     "resposta JSON inv\u00e1lida",
     fixed = TRUE
   )
@@ -182,7 +223,7 @@ test_that("conte\u00fado n\u00e3o JSON e estruturas incompat\u00edveis produzem 
     )
   })
   expect_error(
-    get_material_caracteristica_valor_pdm_sem_filtro(348),
+    get_material_caracteristica_valor_pdm(348, com_filtro = TRUE),
     "estrutura incompat\u00edvel com uma tabela",
     fixed = TRUE
   )

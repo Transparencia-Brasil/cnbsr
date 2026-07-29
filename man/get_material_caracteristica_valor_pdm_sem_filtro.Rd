@@ -2,7 +2,7 @@
 % Please edit documentation in R/material-caracteristica-valor-pdm-sem-filtro.R
 \name{get_material_caracteristica_valor_pdm_sem_filtro}
 \alias{get_material_caracteristica_valor_pdm_sem_filtro}
-\title{Recuperar itens, características e valores por PDM}
+\title{Recuperar itens, características e valores por PDM sem filtro}
 \usage{
 get_material_caracteristica_valor_pdm_sem_filtro(codigo_pdm)
 }
@@ -10,15 +10,12 @@ get_material_caracteristica_valor_pdm_sem_filtro(codigo_pdm)
 \item{codigo_pdm}{Número inteiro positivo correspondente ao código do PDM.}
 }
 \value{
-Um \code{tibble} com uma linha por item e as 12 colunas retornadas pela
-API. A coluna \code{buscaItemCaracteristica} contém as características e os
-valores associados a cada item. Uma consulta válida sem resultados
-retorna zero linhas e as mesmas 12 colunas.
+Um \code{tibble} com o mesmo contrato documentado em
+\code{\link[=get_material_caracteristica_valor_pdm]{get_material_caracteristica_valor_pdm()}}.
 }
 \description{
-Consulta o endpoint \code{materialCaracteristicaValorPdmSemFiltro} do catálogo
-de Materiais do CNBS. A resposta é preservada como fornecida pela API,
-mantendo \code{buscaItemCaracteristica} como uma coluna-lista.
+Função mantida por compatibilidade com a versão 0.1.0. Equivale a chamar
+\code{\link[=get_material_caracteristica_valor_pdm]{get_material_caracteristica_valor_pdm()}} com \code{com_filtro = FALSE}.
 }
 \examples{
 \dontrun{
