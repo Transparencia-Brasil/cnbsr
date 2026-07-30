@@ -260,3 +260,50 @@ cnbs_response_object_tibble <- function(resp, empty) {
   names(columns) <- names(empty)
   tibble::as_tibble(columns, .name_repair = "minimal")
 }
+
+cnbs_response_logical <- function(resp) {
+  body_text <- tryCatch(
+    httr2::resp_body_string(resp),
+    error = function(cnd) {
+      stop(
+        sprintf(
+          "N\u00e3o foi poss\u00edvel ler a resposta da API do CNBS: %s",
+          conditionMessage(cnd)
+        ),
+        call. = FALSE
+      )
+    }
+  )
+
+  if (!nzchar(trimws(body_text))) {
+    cnbs_schema_error(
+      "um valor l\u00f3gico",
+      "a resposta est\u00e1 vazia"
+    )
+  }
+
+  body <- tryCatch(
+    httr2::resp_body_json(resp, simplifyVector = FALSE),
+    error = function(cnd) {
+      stop(
+        sprintf(
+          "A API do CNBS retornou uma resposta JSON inv\u00e1lida: %s",
+          conditionMessage(cnd)
+        ),
+        call. = FALSE
+      )
+    }
+  )
+
+  if (!is.logical(body) || length(body) != 1L || is.na(body)) {
+    cnbs_schema_error(
+      "um valor l\u00f3gico",
+      paste0(
+        "a resposta n\u00e3o \u00e9 um booleano JSON escalar ",
+        "n\u00e3o ausente"
+      )
+    )
+  }
+
+  body
+}
