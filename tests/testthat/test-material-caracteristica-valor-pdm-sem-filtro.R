@@ -101,6 +101,25 @@ test_that("a função da versão 0.1.0 permanece compatível", {
   expect_s3_class(result, "tbl_df")
 })
 
+test_that("a função por PDM usa o endpoint com filtro", {
+  observed_url <- NULL
+  httr2::local_mocked_responses(function(req) {
+    observed_url <<- req$url
+    httr2::response_json(body = material_pdm_rows())
+  })
+
+  result <- get_material_caracteristica_valor_por_pdm(348)
+
+  expect_equal(
+    observed_url,
+    paste0(
+      cnbs_base_url(),
+      "/materialCaracteristcaValorporPDM?codigo_pdm=348"
+    )
+  )
+  expect_s3_class(result, "tbl_df")
+})
+
 test_that("a resposta preserva itens e a estrutura aninhada", {
   httr2::local_mocked_responses(function(req) {
     httr2::response_json(

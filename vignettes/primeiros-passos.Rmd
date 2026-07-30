@@ -78,7 +78,7 @@ Itens e características de um PDM são retornados juntos. Cada linha representa
 um item; `buscaItemCaracteristica` é uma coluna-lista de tabelas:
 
 ```r
-itens <- get_material_caracteristica_valor_pdm(348, com_filtro = TRUE)
+itens <- get_material_caracteristica_valor_por_pdm(348)
 itens_sem_filtro <- get_material_caracteristica_valor_pdm_sem_filtro(348)
 
 itens[, c("codigoItem", "nomePdm", "statusItem")]

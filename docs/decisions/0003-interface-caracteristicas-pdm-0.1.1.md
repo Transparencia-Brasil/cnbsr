@@ -29,6 +29,9 @@ get_material_caracteristica_valor_pdm(codigo_pdm, com_filtro)
 equivale à nova função com `com_filtro = FALSE`. As duas consultas retornam o
 mesmo contrato `tibble` com a coluna-lista `buscaItemCaracteristica`.
 
+`get_material_caracteristica_valor_por_pdm()` também é exportada e equivale à
+função geral com `com_filtro = TRUE`.
+
 ## Consequências
 
 - O pacote passa a consultar sete endpoints de Materiais.
