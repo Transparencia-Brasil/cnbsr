@@ -82,8 +82,6 @@ endpoints incluídos, adiados e excluídos.
 ## Limitações
 
 - O pacote consulta somente o catálogo de Materiais.
-- Não há escrita, cache persistente, banco local ou interface gráfica.
-- Os endpoints selecionados não expõem paginação no OpenAPI atual.
 - As chamadas dependem da disponibilidade e dos contratos da API pública.
 - Endpoints adiados não fazem parte da interface estável da versão 0.1.1.
 
