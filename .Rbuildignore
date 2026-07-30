@@ -12,3 +12,5 @@
 ^CONTRIBUTING\.md$
 ^docs$
 ^\.lintr$
+^cnbsr-manual\.pdf$
+^SHA256SUMS$

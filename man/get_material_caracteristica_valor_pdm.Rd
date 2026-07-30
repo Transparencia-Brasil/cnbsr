@@ -9,9 +9,8 @@ get_material_caracteristica_valor_pdm(codigo_pdm, com_filtro)
 \arguments{
 \item{codigo_pdm}{Número inteiro positivo correspondente ao código do PDM.}
 
-\item{com_filtro}{Valor lógico escalar. Use \code{TRUE} para consultar
-\code{materialCaracteristcaValorporPDM} e \code{FALSE} para consultar
-\code{materialCaracteristicaValorPdmSemFiltro}.}
+\item{com_filtro}{Valor lógico escalar. Use \code{TRUE} para a consulta com filtro
+e \code{FALSE} para a consulta sem filtro.}
 }
 \value{
 Um \code{tibble} com uma linha por item e as 12 colunas retornadas pela
@@ -21,10 +20,9 @@ retorna zero linhas e as mesmas 12 colunas.
 }
 \description{
 Consulta itens, características e valores do catálogo de Materiais do CNBS.
-O argumento \code{com_filtro} seleciona entre os endpoints
-\code{materialCaracteristcaValorporPDM} e
-\code{materialCaracteristicaValorPdmSemFiltro}. A resposta é preservada como
-fornecida pela API, mantendo \code{buscaItemCaracteristica} como uma coluna-lista.
+O argumento \code{com_filtro} seleciona a consulta com ou sem filtro. A resposta
+é preservada como fornecida pela API, mantendo \code{buscaItemCaracteristica}
+como uma coluna-lista.
 }
 \examples{
 \dontrun{

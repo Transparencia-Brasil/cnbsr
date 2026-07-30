@@ -24,7 +24,7 @@ para uma sessão interativa.
 
 ```r
 install.packages("pak")
-pak::pak("rdurl0/cnbsr@v0.1.1")
+pak::pak("rdurl0/cnbsr@v0.1.2")
 
 library(cnbsr)
 ```
@@ -54,6 +54,23 @@ descricao$descricaoItem
 indicadores
 ```
 
+## Consultar unidades de fornecimento
+
+As unidades associadas a um item são retornadas como tabela. Uma combinação
+específica pode ser verificada por um predicado que retorna `TRUE` ou `FALSE`:
+
+```r
+unidades <- get_unidade_fornecimento_por_codigo_item_material(267203)
+unidades
+
+existe_unidade_fornecimento(
+  codigo_item = 267203,
+  sigla_unidade_fornecimento_pdm = "AM",
+  capacidade_unidade_fornecimento = "2.0",
+  sigla_unidade_medida = "ML"
+)
+```
+
 ## Navegar pela hierarquia
 
 Uma classe ou PDM pode ser localizada pelo código. Depois, os dados básicos
@@ -69,7 +86,7 @@ hierarquia <- get_dados_basicos_pdm_por_codigo(17708)
 hierarquia
 ```
 
-Os endpoints selecionados para a versão 0.1.1 não possuem parâmetros de
+Os endpoints selecionados para a versão 0.1.2 não possuem parâmetros de
 paginação.
 
 ## Ler características aninhadas
@@ -89,9 +106,10 @@ caracteristicas$tuplaCaracteristica[[1]]
 
 ## Respostas vazias e erros
 
-Resultados vazios são tabelas de zero linhas com tipos preservados. Argumentos
-inválidos são rejeitados antes da requisição. Falhas HTTP, JSON inválido e
-campos remotos incompatíveis com o contrato produzem erros informativos:
+Resultados tabulares vazios são tabelas de zero linhas com tipos preservados.
+Argumentos inválidos são rejeitados antes da requisição. Falhas HTTP, JSON
+inválido e campos remotos incompatíveis com o contrato produzem erros
+informativos:
 
 ```r
 resultado <- get_busca_material_por_palavra("termo muito específico")

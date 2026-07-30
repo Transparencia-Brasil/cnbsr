@@ -15,3 +15,27 @@
 
 Abra uma issue antes de propor uma mudança que altere a interface pública ou o
 escopo do pacote.
+
+## Manual PDF
+
+O manual do pacote requer uma distribuição LaTeX com `pdflatex`. Para manter o
+ambiente local alinhado ao CI, instale TinyTeX uma vez:
+
+```r
+tinytex::install_tinytex()
+tinytex::tlmgr_install("makeindex")
+tinytex::is_tinytex()
+Sys.which(c("pdflatex", "tlmgr"))
+```
+
+Se uma instalação existente não estiver registrada, execute
+`tinytex::use_tinytex()` e reinicie a sessão. Verifique e gere o manual com:
+
+```sh
+pdflatex --version
+R CMD Rd2pdf --no-preview . --output=cnbsr-manual.pdf
+```
+
+Se a compilação indicar um arquivo `.sty` ausente, localize e instale somente o
+pacote TeX necessário com `tinytex::tlmgr_search()` e
+`tinytex::tlmgr_install()`.
