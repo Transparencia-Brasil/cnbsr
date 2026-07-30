@@ -13,8 +13,9 @@
 | `codigo_pdm` | inteiro de 32 bits | sim | `codigo_pdm` |
 
 O argumento deve ser um número inteiro positivo escalar. O endpoint não expõe
-parâmetros opcionais nem paginação. A função pública seleciona este caminho
-quando `com_filtro = TRUE`.
+parâmetros opcionais nem paginação. Ele é exposto por
+`get_material_caracteristica_valor_por_pdm()` e também pode ser selecionado por
+`get_material_caracteristica_valor_pdm(..., com_filtro = TRUE)`.
 
 ## Resposta
 

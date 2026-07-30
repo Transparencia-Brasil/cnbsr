@@ -49,7 +49,7 @@ indicadores
 ```r
 pdms <- get_codigo_pdm_classe(6505, busca_classe = TRUE)
 hierarquia <- get_dados_basicos_pdm_por_codigo(17708)
-itens <- get_material_caracteristica_valor_pdm(348, com_filtro = TRUE)
+itens <- get_material_caracteristica_valor_por_pdm(348)
 itens_sem_filtro <- get_material_caracteristica_valor_pdm_sem_filtro(348)
 
 hierarquia
@@ -73,7 +73,7 @@ um fluxo completo.
 | `GET /material/v1/dadosbasicospdmporcodigo` | `get_dados_basicos_pdm_por_codigo()` | [Dados básicos de PDM](docs/endpoints/dados-basicos-pdm-por-codigo.md) |
 | `GET /material/v1/dadosItemMaterialporCodigo` | `get_dados_item_material_por_codigo()` | [Descrição do item](docs/endpoints/dados-item-material-por-codigo.md) |
 | `GET /material/v1/dadosItemMaterialporCodigoSiasgnet` | `get_dados_item_material_por_codigo_siasgnet()` | [Indicadores do item](docs/endpoints/dados-item-material-por-codigo-siasgnet.md) |
-| `GET /material/v1/materialCaracteristcaValorporPDM` | `get_material_caracteristica_valor_pdm(..., com_filtro = TRUE)` | [Características por PDM](docs/endpoints/material-caracteristica-valor-pdm.md) |
+| `GET /material/v1/materialCaracteristcaValorporPDM` | `get_material_caracteristica_valor_por_pdm()` | [Características por PDM](docs/endpoints/material-caracteristica-valor-pdm.md) |
 | `GET /material/v1/materialCaracteristicaValorPdmSemFiltro` | `get_material_caracteristica_valor_pdm_sem_filtro()` | [Características por PDM](docs/endpoints/material-caracteristica-valor-pdm-sem-filtro.md) |
 
 A [matriz de Materiais](docs/endpoints/matriz-material-0.1.1.md) registra os

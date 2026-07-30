@@ -16,7 +16,7 @@ catálogo de Materiais e a operações `GET`.
 | `GET /material/v1/dadosbasicospdmporcodigo` | `get_dados_basicos_pdm_por_codigo()` | Dados básicos e hierarquia do PDM |
 | `GET /material/v1/dadosItemMaterialporCodigo` | `get_dados_item_material_por_codigo()` | Descrição do item por código |
 | `GET /material/v1/dadosItemMaterialporCodigoSiasgnet` | `get_dados_item_material_por_codigo_siasgnet()` | Indicadores do item por código |
-| `GET /material/v1/materialCaracteristcaValorporPDM` | `get_material_caracteristica_valor_pdm(..., com_filtro = TRUE)` | Itens e características por PDM com filtro |
+| `GET /material/v1/materialCaracteristcaValorporPDM` | `get_material_caracteristica_valor_por_pdm()` | Itens e características por PDM com filtro |
 | `GET /material/v1/materialCaracteristicaValorPdmSemFiltro` | `get_material_caracteristica_valor_pdm_sem_filtro()` | Itens e características por PDM sem filtro |
 
 Os contratos individuais registram parâmetros, esquemas, respostas vazias e

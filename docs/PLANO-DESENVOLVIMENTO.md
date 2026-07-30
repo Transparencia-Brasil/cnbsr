@@ -14,7 +14,7 @@ Catálogo Nacional de Bens e Serviços (CNBS).
 | `GET /material/v1/dadosbasicospdmporcodigo` | `get_dados_basicos_pdm_por_codigo()` | `0.0.0.9003` |
 | `GET /material/v1/dadosItemMaterialporCodigo` | `get_dados_item_material_por_codigo()` | `0.0.0.9004` |
 | `GET /material/v1/dadosItemMaterialporCodigoSiasgnet` | `get_dados_item_material_por_codigo_siasgnet()` | `0.0.0.9005` |
-| `GET /material/v1/materialCaracteristcaValorporPDM` | `get_material_caracteristica_valor_pdm()` | `0.1.1` |
+| `GET /material/v1/materialCaracteristcaValorporPDM` | `get_material_caracteristica_valor_por_pdm()` | `0.1.1` |
 
 Os sete endpoints selecionados estão implementados. A
 [matriz da versão 0.1.1](endpoints/matriz-material-0.1.1.md) registra todos os

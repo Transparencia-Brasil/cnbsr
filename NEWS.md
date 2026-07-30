@@ -2,8 +2,10 @@
 
 ## Funcionalidades
 
-- Adiciona `get_material_caracteristica_valor_pdm()` para consultar itens,
-  características e valores por PDM com seleção explícita do filtro.
+- Adiciona `get_material_caracteristica_valor_pdm()` para selecionar a consulta
+  de itens, características e valores por PDM com ou sem filtro.
+- Adiciona `get_material_caracteristica_valor_por_pdm()` como atalho explícito
+  para a consulta por PDM com filtro.
 - Incorpora o endpoint `materialCaracteristcaValorporPDM`, elevando de seis
   para sete os endpoints de Materiais disponíveis no pacote.
 - Mantém `get_material_caracteristica_valor_pdm_sem_filtro()` compatível com a
