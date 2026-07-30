@@ -107,15 +107,13 @@ cast_busca_item_caracteristica <- function(value) {
 #' Recuperar itens, características e valores por PDM
 #'
 #' Consulta itens, características e valores do catálogo de Materiais do CNBS.
-#' O argumento `com_filtro` seleciona entre os endpoints
-#' `materialCaracteristicaValorporPDM` e
-#' `materialCaracteristicaValorPdmSemFiltro`. A resposta é preservada como
-#' fornecida pela API, mantendo `buscaItemCaracteristica` como uma coluna-lista.
+#' O argumento `com_filtro` seleciona a consulta com ou sem filtro. A resposta
+#' é preservada como fornecida pela API, mantendo `buscaItemCaracteristica`
+#' como uma coluna-lista.
 #'
 #' @param codigo_pdm Número inteiro positivo correspondente ao código do PDM.
-#' @param com_filtro Valor lógico escalar. Use `TRUE` para consultar
-#'   `materialCaracteristcaValorporPDM` e `FALSE` para consultar
-#'   `materialCaracteristicaValorPdmSemFiltro`.
+#' @param com_filtro Valor lógico escalar. Use `TRUE` para a consulta com filtro
+#'   e `FALSE` para a consulta sem filtro.
 #'
 #' @return Um `tibble` com uma linha por item e as 12 colunas retornadas pela
 #'   API. A coluna `buscaItemCaracteristica` contém as características e os
@@ -152,13 +150,12 @@ get_material_caracteristica_valor_pdm <- function(codigo_pdm, com_filtro) { # no
 
 #' Recuperar itens, características e valores por PDM sem filtro
 #'
-#' Função mantida por compatibilidade com a versão 0.1.0. Equivale a chamar
-#' [get_material_caracteristica_valor_pdm()] com `com_filtro = FALSE`.
+#' Função mantida por compatibilidade com a versão 0.1.0. Equivale à consulta
+#' geral com `com_filtro = FALSE`.
 #'
 #' @inheritParams get_material_caracteristica_valor_pdm
 #'
-#' @return Um `tibble` com o mesmo contrato documentado em
-#'   [get_material_caracteristica_valor_pdm()].
+#' @return Um `tibble` com o mesmo contrato de 12 colunas da consulta geral.
 #'
 #' @examples
 #' \dontrun{
@@ -172,13 +169,12 @@ get_material_caracteristica_valor_pdm_sem_filtro <- function(codigo_pdm) { # nol
 
 #' Recuperar itens, características e valores por PDM
 #'
-#' Função mantida por compatibilidade com a versão 0.1.0. Equivale a chamar
-#' [get_material_caracteristica_valor_por_pdm()] com `com_filtro = TRUE`.
+#' Função mantida por compatibilidade com a versão 0.1.0. Equivale à consulta
+#' geral com `com_filtro = TRUE`.
 #'
 #' @inheritParams get_material_caracteristica_valor_pdm
 #'
-#' @return Um `tibble` com o mesmo contrato documentado em
-#'   [get_material_caracteristica_valor_por_pdm()].
+#' @return Um `tibble` com o mesmo contrato de 12 colunas da consulta geral.
 #'
 #' @examples
 #' \dontrun{

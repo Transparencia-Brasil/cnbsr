@@ -1,8 +1,8 @@
 # {cnbsr} — Catálogo Nacional de Bens e Serviços com R
 
 O `cnbsr` consulta o Catálogo Nacional de Bens e Serviços (CNBS) por meio
-da API pública do Governo Federal. A versão 0.1.1 é limitada ao catálogo de
-**Materiais** e oferece resultados tabulares prontos para análise no R.
+da API pública do Governo Federal. A versão 0.1.2 é limitada ao catálogo de
+**Materiais** e oferece resultados estáveis prontos para uso no R.
 
 ## Instalação
 
@@ -10,7 +10,7 @@ Instale a versão publicada no GitHub com:
 
 ```r
 install.packages("pak")
-pak::pak("rdurl0/cnbsr@v0.1.1")
+pak::pak("rdurl0/cnbsr@v0.1.2")
 ```
 
 Para contribuir com o projeto, clone o repositório, abra `cnbsr.Rproj` e
@@ -44,6 +44,22 @@ descricao
 indicadores
 ```
 
+### Consultar unidades de fornecimento
+
+```r
+unidades <- get_unidade_fornecimento_por_codigo_item_material(267203)
+
+existe <- existe_unidade_fornecimento(
+  267203,
+  "AM",
+  capacidade_unidade_fornecimento = "2.0",
+  sigla_unidade_medida = "ML"
+)
+
+unidades
+existe
+```
+
 ### Navegar pela hierarquia e pelas características
 
 ```r
@@ -57,14 +73,15 @@ itens[, c("codigoItem", "nomePdm")]
 itens$buscaItemCaracteristica[[1]]
 ```
 
-As consultas válidas sem resultados retornam um `tibble` de zero linhas
-com as mesmas colunas. Falhas HTTP, JSON inválido e mudanças incompatíveis no
-contrato remoto produzem erros informativos.
+As consultas tabulares válidas sem resultados retornam um `tibble` de zero
+linhas com as mesmas colunas. Predicados booleanos retornam `TRUE` ou `FALSE`.
+Falhas HTTP, JSON inválido e mudanças incompatíveis no contrato remoto produzem
+erros informativos.
 
 Consulte a [vignette de primeiros passos](vignettes/primeiros-passos.Rmd) para
 um fluxo completo.
 
-## Endpoints da versão 0.1.1
+## Endpoints da versão 0.1.2
 
 | Endpoint | Função | Contrato |
 | --- | --- | --- |
@@ -75,15 +92,17 @@ um fluxo completo.
 | `GET /material/v1/dadosItemMaterialporCodigoSiasgnet` | `get_dados_item_material_por_codigo_siasgnet()` | [Indicadores do item](docs/endpoints/dados-item-material-por-codigo-siasgnet.md) |
 | `GET /material/v1/materialCaracteristcaValorporPDM` | `get_material_caracteristica_valor_por_pdm()` | [Características por PDM](docs/endpoints/material-caracteristica-valor-pdm.md) |
 | `GET /material/v1/materialCaracteristicaValorPdmSemFiltro` | `get_material_caracteristica_valor_pdm_sem_filtro()` | [Características por PDM](docs/endpoints/material-caracteristica-valor-pdm-sem-filtro.md) |
+| `GET /material/v1/unidadeFornecimentoPorCodigoItemMaterial` | `get_unidade_fornecimento_por_codigo_item_material()` | [Unidades por item](docs/endpoints/unidade-fornecimento-por-codigo-item-material.md) |
+| `GET /material/v1/existeunidadefornecimento` | `existe_unidade_fornecimento()` | [Existência de unidade](docs/endpoints/existe-unidade-fornecimento.md) |
 
-A [matriz de Materiais](docs/endpoints/matriz-material-0.1.1.md) registra os
+A [matriz de Materiais](docs/endpoints/matriz-material-0.1.2.md) registra os
 endpoints incluídos, adiados e excluídos.
 
 ## Limitações
 
 - O pacote consulta somente o catálogo de Materiais.
 - As chamadas dependem da disponibilidade e dos contratos da API pública.
-- Endpoints adiados não fazem parte da interface estável da versão 0.1.1.
+- Endpoints adiados não fazem parte da interface estável da versão 0.1.2.
 
 ## Desenvolvimento
 
@@ -98,6 +117,25 @@ lints <- lintr::lint_package()
 print(lints)
 
 rcmdcheck::rcmdcheck(args = "--as-cran")
+```
+
+Para gerar o manual PDF localmente, instale uma vez a distribuição TinyTeX. O
+pacote R `tinytex` e a distribuição LaTeX são componentes diferentes:
+
+```r
+tinytex::install_tinytex()
+tinytex::tlmgr_install("makeindex")
+tinytex::is_tinytex()
+Sys.which(c("pdflatex", "tlmgr"))
+```
+
+Reinicie a sessão se os executáveis ainda não aparecerem no `PATH`. Para
+registrar uma instalação já existente, use `tinytex::use_tinytex()`. Depois,
+gere os mesmos artefatos básicos do CI:
+
+```sh
+R CMD build .
+R CMD Rd2pdf --no-preview . --output=cnbsr-manual.pdf
 ```
 
 Consulte também [Como contribuir](CONTRIBUTING.md).

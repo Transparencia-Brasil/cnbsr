@@ -4,6 +4,8 @@
 .Ruserdata
 *.Rcheck/
 *.tar.gz
+/cnbsr-manual.pdf
+/SHA256SUMS
 revdep/
 renv/library/
 renv/staging/

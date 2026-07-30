@@ -10,12 +10,11 @@ get_material_caracteristica_valor_pdm_sem_filtro(codigo_pdm)
 \item{codigo_pdm}{Número inteiro positivo correspondente ao código do PDM.}
 }
 \value{
-Um \code{tibble} com o mesmo contrato documentado em
-\code{\link[=get_material_caracteristica_valor_pdm]{get_material_caracteristica_valor_pdm()}}.
+Um \code{tibble} com o mesmo contrato de 12 colunas da consulta geral.
 }
 \description{
-Função mantida por compatibilidade com a versão 0.1.0. Equivale a chamar
-\code{\link[=get_material_caracteristica_valor_pdm]{get_material_caracteristica_valor_pdm()}} com \code{com_filtro = FALSE}.
+Função mantida por compatibilidade com a versão 0.1.0. Equivale à consulta
+geral com \code{com_filtro = FALSE}.
 }
 \examples{
 \dontrun{

@@ -1,3 +1,26 @@
+# cnbsr 0.1.2
+
+## Funcionalidades
+
+- Adiciona `get_unidade_fornecimento_por_codigo_item_material()` para recuperar
+  as unidades de fornecimento associadas a um item de material.
+- Adiciona `existe_unidade_fornecimento()` para verificar uma combinação de
+  item, unidade de fornecimento, capacidade e unidade de medida.
+- Eleva de sete para nove os endpoints `GET` de Materiais disponíveis.
+
+## Robustez
+
+- Valida códigos, textos obrigatórios e parâmetros opcionais antes da
+  requisição.
+- Converte respostas tabulares vazias preservando o esquema e rejeita respostas
+  booleanas ausentes ou incompatíveis.
+
+## Documentação e qualidade
+
+- Atualiza o inventário para os 32 endpoints `GET` observados no módulo de
+  Materiais e registra o roadmap até a versão 0.2.0.
+- Documenta a instalação local do TinyTeX e a geração do manual PDF.
+
 # cnbsr 0.1.1
 
 ## Funcionalidades
