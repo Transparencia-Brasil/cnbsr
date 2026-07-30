@@ -16,6 +16,10 @@
 O argumento deve ser um número inteiro positivo escalar. O endpoint não expõe
 parâmetros opcionais nem paginação.
 
+Na versão 0.1.1, este caminho pode ser consultado pela função compatível
+`get_material_caracteristica_valor_pdm_sem_filtro()` ou pela função geral
+`get_material_caracteristica_valor_pdm(..., com_filtro = FALSE)`.
+
 ## Resposta
 
 Uma resposta bem-sucedida possui status `200` e um array JSON. Cada item é

@@ -1,6 +1,6 @@
 Package: cnbsr
 Title: Consulta Ao Catálogo Nacional De Bens e Serviços
-Version: 0.1.0
+Version: 0.1.1
 Authors@R: 
     person("Raul", "Durlo", , "durlo.raul@gmail.com", role = c("aut", "cre"))
 Author: Raul Durlo [aut, cre]

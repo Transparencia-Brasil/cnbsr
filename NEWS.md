@@ -1,3 +1,19 @@
+# cnbsr 0.1.1
+
+## Funcionalidades
+
+- Adiciona `get_material_caracteristica_valor_pdm()` para consultar itens,
+  características e valores por PDM com seleção explícita do filtro.
+- Incorpora o endpoint `materialCaracteristcaValorporPDM`, elevando de seis
+  para sete os endpoints de Materiais disponíveis no pacote.
+- Mantém `get_material_caracteristica_valor_pdm_sem_filtro()` compatível com a
+  interface pública da versão 0.1.0.
+
+## Robustez
+
+- Valida `com_filtro` antes de realizar a requisição e produz erro informativo
+  para valores que não sejam lógicos escalares não ausentes.
+
 # cnbsr 0.1.0
 
 ## Funcionalidades

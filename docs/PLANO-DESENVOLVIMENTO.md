@@ -14,9 +14,10 @@ Catálogo Nacional de Bens e Serviços (CNBS).
 | `GET /material/v1/dadosbasicospdmporcodigo` | `get_dados_basicos_pdm_por_codigo()` | `0.0.0.9003` |
 | `GET /material/v1/dadosItemMaterialporCodigo` | `get_dados_item_material_por_codigo()` | `0.0.0.9004` |
 | `GET /material/v1/dadosItemMaterialporCodigoSiasgnet` | `get_dados_item_material_por_codigo_siasgnet()` | `0.0.0.9005` |
+| `GET /material/v1/materialCaracteristcaValorporPDM` | `get_material_caracteristica_valor_pdm()` | `0.1.1` |
 
-Os seis endpoints selecionados para o MVP estão implementados. A
-[matriz da versão 0.1.0](endpoints/matriz-material-0.1.0.md) registra todos os
+Os sete endpoints selecionados estão implementados. A
+[matriz da versão 0.1.1](endpoints/matriz-material-0.1.1.md) registra todos os
 endpoints de Materiais observados no OpenAPI e distingue os incluídos, adiados e
 excluídos.
 
@@ -35,10 +36,10 @@ arquitetura, interface pública, dependências ou escopo devem ser registradas e
 | 4 | Implementar o cliente HTTP | [#3](https://github.com/rdurl0/cnbsr/issues/3) | Requisições e tratamento de erros funcionando |
 | 5 | Padronizar as respostas | [#4](https://github.com/rdurl0/cnbsr/issues/4) | Dados retornados como estruturas estáveis no R |
 | 6 | Testar, documentar e preparar a versão | [#5](https://github.com/rdurl0/cnbsr/issues/5) | Pacote verificado e pronto para 0.1.0 |
+| 7 | Incorporar o sétimo endpoint | [#14](https://github.com/rdurl0/cnbsr/issues/14) | Interface compatível e pacote pronto para 0.1.1 |
 
-As macroatividades 1 a 5 possuem entregáveis implementados e documentados. A
-macroatividade 6 será concluída com os checks finais e a publicação da versão
-0.1.0.
+As macroatividades 1 a 6 foram concluídas na versão 0.1.0. A macroatividade 7
+acompanha a revisão e a decisão de publicação da versão 0.1.1.
 
 ## Estados sugeridos
 
