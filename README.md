@@ -10,7 +10,7 @@ Instale a versão publicada no GitHub com:
 
 ```r
 install.packages("pak")
-pak::pak("rdurl0/cnbsr@v0.1.2")
+pak::pak("Transparencia-Brasil/cnbsr@v0.1.2")
 ```
 
 Para contribuir com o projeto, clone o repositório, abra `cnbsr.Rproj` e
